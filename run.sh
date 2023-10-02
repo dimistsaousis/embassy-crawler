@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Check if virtual environment exists, if not create it
-if [ ! -d "env" ]; then
-  python3 -m venv env
+if [ ! -d ".embassy_crawler_venv" ]; then
+  python3 -m venv .embassy_crawler_venv
 fi
 
 # Activate the virtual environment
-source env/bin/activate
+source .embassy_crawler_venv/bin/activate
 
 # Define cleanup procedure
 function cleanup {
@@ -27,4 +27,5 @@ export PYTHONWARNINGS="ignore"
 # Run the script
 echo "Running appointment listener..."
 echo 
-python main.py
+python main.py --email "$1" --password "$2"
+

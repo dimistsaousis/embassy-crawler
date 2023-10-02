@@ -20,7 +20,7 @@ Before running the script, make sure you have registered an account with the Gre
 1. Run the script:
 
    ```bash
-   bash run.sh
+   bash run.sh <your-email> <your-password>
    ```
 
    This will execute the `main.py` script, which will perform the following steps:
