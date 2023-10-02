@@ -17,17 +17,19 @@ Before running the script, make sure you have registered an account with the Gre
 
 ## Usage
 
-1. Run the script:
+1. Run the script with your email and password as arguments:
 
    ```bash
-   bash run.sh <your-email> <your-password>
+   bash run.sh <your-email> <your-password> [--debug]
    ```
+
+   - The `--debug` flag is optional. When set, the script will trigger the alarm after 3 retries for testing purposes.
 
    This will execute the `main.py` script, which will perform the following steps:
 
    - Launch a headless Chrome web browser.
    - Navigate to the embassy's appointment scheduling website.
-   - Prompt you to enter your email and password for login.
+   - Use the provided email and password for login.
    - Check for available appointments.
    - If appointments are not available, it will continue to monitor and alert you when an appointment becomes available.
 

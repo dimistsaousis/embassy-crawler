@@ -13,7 +13,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 PAGE_TIMEOUT = 10
-DEBUG = True  # when set to true alarm will set off after 3 retries for testing
 LOGIN_PAGE = "https://www.supersaas.co.uk/schedule/login/Greek_Embassy_London/Military"
 APPOINTMENTS_URL = "https://www.supersaas.co.uk/schedule/Greek_Embassy_London/Military"
 
@@ -64,13 +63,13 @@ def has_available_appointment(driver):
     return True
 
 
-def login_and_monitor(email, password):
+def login_and_monitor(email, password, debug=False):
     count = 0
     start_time = datetime.now()
     try:
         driver = get_driver()
         login(driver, email, password)
-        while not has_available_appointment(driver) and (not DEBUG or count < 3):
+        while not has_available_appointment(driver) and (not debug or count < 3):
             print(
                 f"\r\033[38;5;202mCheck Count ({count}): No appointments available\033[0m",
                 end="",
@@ -96,10 +95,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Embassy Appointment Alarm Script")
     parser.add_argument("--email", required=True, help="Your email address")
     parser.add_argument("--password", required=True, help="Your password")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode to trigger alarm after 3 retries")
     args = parser.parse_args()
 
     try:
-        login_and_monitor(args.email, args.password)
+        login_and_monitor(args.email, args.password, args.debug)
     except ValueError:
         sys.stderr.write(
             "\033[31mLogin error: Invalid login name or password, see README for more details on how to register.\033[0m\n"

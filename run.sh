@@ -27,5 +27,10 @@ export PYTHONWARNINGS="ignore"
 # Run the script
 echo "Running appointment listener..."
 echo 
-python main.py --email "$1" --password "$2"
+# Check for debug flag
+if [ "$3" == "--debug" ]; then
+    python main.py --email "$1" --password "$2" --debug
+else
+    python main.py --email "$1" --password "$2"
+fi
 
